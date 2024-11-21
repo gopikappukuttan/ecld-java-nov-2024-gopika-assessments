@@ -52,8 +52,9 @@ public class Calculator {
         }
         //calling method divide() if chosen option is 4
         if (choiceNum == 4) {
+            //handling division if second integer is 0
             if(b==0){
-                System.out.println("Invalid since divison is by zero");
+                System.out.println("Undefined (since divison is by zero)");
             }else{
                 System.out.println(a + " / " + b + " = " + divide(a, b));
             }
