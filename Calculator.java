@@ -52,7 +52,11 @@ public class Calculator {
         }
         //calling method divide() if chosen option is 4
         if (choiceNum == 4) {
-            System.out.println(a + " / " + b + " = " + divide(a, b));
+            if(b==0){
+                System.out.println("Invalid since divison is by zero");
+            }else{
+                System.out.println(a + " / " + b + " = " + divide(a, b));
+            }
         }
         //closing scanner
         sc.close();
