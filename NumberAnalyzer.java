@@ -31,21 +31,11 @@ public class NumberAnalyzer {
         Scanner sc = new Scanner(System.in);
         //user inputs and method use
         System.out.println("Enter 5 different Numbers");
-        int num1 = sc.nextInt();
-        analyzeNumber(num1);
-        System.out.println("Enter next Number");
-        int num2 = sc.nextInt();
-        System.out.println("Enter next Number");
-        analyzeNumber(num2);
-        System.out.println("Enter next Number");
-        int num3 = sc.nextInt();
-        analyzeNumber(num3);
-        System.out.println("Enter next Number");
-        int num4 = sc.nextInt();
-        analyzeNumber(num4);
-        System.out.println("Enter next Number");
-        int num5 = sc.nextInt();
-        analyzeNumber(num5);
+        for(int i=1;i<=5;i++) {
+            int num = sc.nextInt();
+            analyzeNumber(num);
+            System.out.println("Enter the next number");
+        }
         //closing scanner
         sc.close();
     }
