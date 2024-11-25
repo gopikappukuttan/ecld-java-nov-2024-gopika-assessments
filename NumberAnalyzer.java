@@ -25,18 +25,25 @@ public class NumberAnalyzer {
             System.out.println("-Not a Multiple of 5");
         }
     }
-//main method
+ //main method
     public static void main(String[] args) {
         //making new object of scanner class
         Scanner sc = new Scanner(System.in);
-        //user inputs and method use
-        System.out.println("Enter 5 different Numbers");
-        for(int i=1;i<=5;i++) {
-            int num = sc.nextInt();
-            analyzeNumber(num);
-            System.out.println("Enter the next number");
+        int i = 1; // To count valid inputs
+        while (i <= 5) {
+            try {
+                // Prompt the user for input
+                System.out.print("Enter number " + i + ": ");
+                int num = sc.nextInt(); // Read the number
+                analyzeNumber(num); // Analyze the number
+                i++; // Increment only if input is valid
+            } catch (InputMismatchException e) {
+                // Handle invalid input
+                System.out.println("Invalid input. Please enter an integer.");
+                sc.next(); // Clear the invalid input
+            }
         }
-        //closing scanner
+
+        // Close the scanner
         sc.close();
     }
-}
