@@ -1,5 +1,6 @@
 package com.edstem.ecld.assessment;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class NumberAnalyzer {
@@ -25,7 +26,8 @@ public class NumberAnalyzer {
             System.out.println("-Not a Multiple of 5");
         }
     }
- //main method
+
+    //main method
     public static void main(String[] args) {
         //making new object of scanner class
         Scanner sc = new Scanner(System.in);
@@ -47,3 +49,4 @@ public class NumberAnalyzer {
         // Close the scanner
         sc.close();
     }
+}
