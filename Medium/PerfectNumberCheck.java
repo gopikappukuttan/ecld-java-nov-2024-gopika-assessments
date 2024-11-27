@@ -11,12 +11,8 @@ public class PerfectNumberCheck {
                 sum += i; // Add divisor to sum
             }
         }
-        // If the sum of divisors equals the number, it's perfect
-        if (num == sum) {
-            return true;
-        } else {
-            return false; // Return false if the sum doesn't equal the number
-        }
+         // If the sum of divisors equals the number, it's perfect
+        return num == sum;
     }
 
     public static void main(String[] args) {
