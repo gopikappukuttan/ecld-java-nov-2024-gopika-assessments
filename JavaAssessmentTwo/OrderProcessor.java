@@ -123,29 +123,29 @@ public class OrderProcessor {
 
     public static void main(String[] args) {
         OrderProcessor processor = new OrderProcessor();
-try {
-    // Create order
-    OrderItem itemOne = new OrderItem("1", 2, 80.0);
-    OrderItem itemTwo = new OrderItem("2", 5, 50.0);
+        try {
+            // Create order
+            OrderItem itemOne = new OrderItem("1", 2, 80.0);
+            OrderItem itemTwo = new OrderItem("2", 5, 50.0);
 
-    // Create regular orders
-    List<OrderItem> items = new ArrayList<>();
-    items.add(itemOne);
-    items.add(itemTwo);
-    RegularOrder regularOrder = new RegularOrder("1", "Gopika P A", LocalDateTime.now(), items);
-    //create priority orders
-    PriorityOrder priorityOrder = new PriorityOrder("2", "Sruthy", LocalDateTime.now(), items, true, 25.0);
+            // Create regular orders
+            List<OrderItem> items = new ArrayList<>();
+            items.add(itemOne);
+            items.add(itemTwo);
+            RegularOrder regularOrder = new RegularOrder("1", "Gopika P A", LocalDateTime.now(), items);
+            //create priority orders
+            PriorityOrder priorityOrder = new PriorityOrder("2", "Sruthy", LocalDateTime.now(), items, true, 25.0);
 
-    // Process orders
-    processor.processOrder(regularOrder);
-    processor.processOrder(priorityOrder);
+            // Process orders
+            processor.processOrder(regularOrder);
+            processor.processOrder(priorityOrder);
 
-    // results
-    System.out.println("Total Revenue: " + processor.getTotalRevenue());
-    System.out.println("Average Order Value: " + processor.getAverageOrderValue());
-} catch (IllegalArgumentException e) {
-    System.out.println(e.getMessage());
-}
+            // results
+            System.out.println("Total Revenue: " + processor.getTotalRevenue());
+            System.out.println("Average Order Value: " + processor.getAverageOrderValue());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
