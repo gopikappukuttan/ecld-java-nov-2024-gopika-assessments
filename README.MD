@@ -28,7 +28,7 @@ A Training Repository that hosts exercises done and assesments conducted.
 
 ### Very Hard Problems
 - [Odd One Out](https://edabit.com/challenge/bpqfCQ7zumf5Ep24Z) - [Solution](exercises/easy/OddOneOut.java)
-- [Reverse Words in a String](hhttps://edabit.com/challenge/njGTBhXa7zP3pvsn) - [Solution](exercises/easy/ReverseWords.java)
+- [Reverse Words in a String](https://edabit.com/challenge/njGTBhXa7zP3pvsn) - [Solution](exercises/easy/ReverseWords.java)
  
 ## Assessments
 - [Nov 21, 2024](assessments/20241121)
