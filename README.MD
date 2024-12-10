@@ -27,8 +27,8 @@ A Training Repository that hosts exercises done and assesments conducted.
 - [Extract a Word From a Sentence](https://edabit.com/challenge/XxS3L2wDEKhi9Hw6W) - [Solution](exercises/hard/ExtractWordFromSentence.java)
 
 ### Very Hard Problems
-- [Odd One Out](https://edabit.com/challenge/bpqfCQ7zumf5Ep24Z) - [Solution](exercises/easy/OddOneOut.java)
-- [Reverse Words in a String](https://edabit.com/challenge/njGTBhXa7zP3pvsn) - [Solution](exercises/easy/ReverseWords.java)
+- [Odd One Out](https://edabit.com/challenge/bpqfCQ7zumf5Ep24Z) - [Solution](exercises/very_hard/OddOneOut.java)
+- [Reverse Words in a String](https://edabit.com/challenge/njGTBhXa7zP3pvsnp) - [Solution](exercises/very_hard/ReverseWords.java)
  
 ## Assessments
 - [Nov 21, 2024](assessments/20241121)
