@@ -92,7 +92,7 @@ class SmartPlaylist implements PlaylistManager {
         currentQueue.add(track);
     }
 
-    @Override
+   @Override
     public void removeTrack(Long trackId) {
         boolean trackFound = false;
         Iterator<Track> iterator = currentQueue.iterator();
@@ -100,11 +100,12 @@ class SmartPlaylist implements PlaylistManager {
             Track track = iterator.next();
             if (track.getTrackId().equals(trackId)) {
                 iterator.remove();
+                trackFound = true;
                 break;
             }
         }
         if (!trackFound) {
-            throw new NoSuchElementException("Track with ID " + trackId + " not found.");
+            System.err.println("Track with ID " + trackId + " not found in the playlist.");
         }
     }
 
@@ -188,6 +189,12 @@ public class SmartPlaylistManagementSystem {
             playlist.moveTrack(0, 2);
             System.out.println("\nPlaylist After Moving Track:");
             printTracks(playlist.getCurrentQueue().iterator());
+
+             // Using removeTrack method
+            playlist.removeTrack(1L);
+            System.out.println("\nPlaylist After Removing Track with ID 1:");
+            printTracks(playlist.getCurrentQueue().iterator());
+            
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         }
