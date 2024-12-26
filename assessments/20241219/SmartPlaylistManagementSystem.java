@@ -46,7 +46,6 @@ class Track {
     }
 }
 
-
 interface PlaylistManager {
     void addTrack(Track track);
 
@@ -61,28 +60,20 @@ interface PlaylistManager {
 
 class SmartPlaylist implements PlaylistManager {
     private List<Track> currentQueue;
-    private List<Track> playedTracks;
 
     public SmartPlaylist() {
         currentQueue = new ArrayList<>();
-        playedTracks = new LinkedList<>();
     }
 
     public List<Track> getCurrentQueue() {
         return currentQueue;
     }
 
-    public void setCurrentQueue(List<Track> currentQueue) {
-        this.currentQueue = currentQueue;
-    }
-
-    public List<Track> getPlayedTracks() {
-        return playedTracks;
-    }
-
-    public void setPlayedTracks(List<Track> playedTracks) {
-        this.playedTracks = playedTracks;
-    }
+    /**
+     * Justification for using ArrayList:
+     * - Frequent access by index is required for operations like moving tracks, which is efficient in ArrayList.
+     * - ArrayList provides better performance compared to LinkedList for scenarios with fewer insertions/deletions in the middle.
+     */
 
     @Override
     public void addTrack(Track track) {
@@ -92,7 +83,7 @@ class SmartPlaylist implements PlaylistManager {
         currentQueue.add(track);
     }
 
-   @Override
+    @Override
     public void removeTrack(Long trackId) {
         boolean trackFound = false;
         Iterator<Track> iterator = currentQueue.iterator();
@@ -129,7 +120,6 @@ class SmartPlaylist implements PlaylistManager {
         return shuffledList.iterator();
     }
 
-
     @Override
     public void updateRating(Long trackId, Integer newRating) {
         boolean trackFound = false;
@@ -139,11 +129,12 @@ class SmartPlaylist implements PlaylistManager {
         for (Track track : currentQueue) {
             if (track.getTrackId().equals(trackId)) {
                 track.setRating(newRating);
-                return;
+                trackFound = true;
+                break;
             }
         }
         if (!trackFound) {
-            throw new NoSuchElementException("Track with ID " + trackId + " not found.");
+            System.err.println("Track with ID " + trackId + " not found.");
         }
     }
 
@@ -160,47 +151,95 @@ class SmartPlaylist implements PlaylistManager {
 
 public class SmartPlaylistManagementSystem {
     public static void main(String[] args) {
-        try {
-            SmartPlaylist playlist = new SmartPlaylist();
+        Scanner scanner = new Scanner(System.in);
+        SmartPlaylist playlist = new SmartPlaylist();
 
-            playlist.addTrack(new Track(1L, "Malayalam", 4, true));
-            playlist.addTrack(new Track(2L, "English", 5, false));
-            playlist.addTrack(new Track(3L, "Hindi", 3, true));
+        while (true) {
+            System.out.println("\n--- Smart Playlist Management System ---");
+            System.out.println("1. Add Track");
+            System.out.println("2. Remove Track");
+            System.out.println("3. Move Track");
+            System.out.println("4. Shuffle Playlist");
+            System.out.println("5. Update Track Rating");
+            System.out.println("6. View Premium Tracks");
+            System.out.println("7. View All Tracks");
+            System.out.println("8. Exit");
+            System.out.print("Enter your choice: ");
 
-            //Print Original Playlist
-            System.out.println("Original Playlist:");
-            printTracks(playlist.getCurrentQueue().iterator()); // Original order
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
 
-            // Print the shuffled playlist
-            System.out.println("\nShuffled Playlist:");
-            Iterator<Track> shuffledIterator = playlist.shuffleIterator();
-            printTracks(shuffledIterator);
+            switch (choice) {
+                case 1 -> {
+                    System.out.print("Enter Track ID: ");
+                    Long id = scanner.nextLong();
+                    scanner.nextLine();
+                    System.out.print("Enter Title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Enter Rating (1-5): ");
+                    int rating = scanner.nextInt();
+                    System.out.print("Is Premium (true/false): ");
+                    boolean isPremium = scanner.nextBoolean();
 
-            // Print premium tracks first
-            System.out.println("\nPremium Tracks:");
-            printTracks(playlist.getPremiumTracks().iterator());
-
-            // Using updateRating method
-            playlist.updateRating(1L, 5);
-            System.out.println("\nUpdated Rating for Track 1:");
-            printTracks(playlist.getCurrentQueue().iterator());
-
-            // Using moveTrack() method
-            playlist.moveTrack(0, 2);
-            System.out.println("\nPlaylist After Moving Track:");
-            printTracks(playlist.getCurrentQueue().iterator());
-
-             // Using removeTrack method
-            playlist.removeTrack(1L);
-            System.out.println("\nPlaylist After Removing Track with ID 1:");
-            printTracks(playlist.getCurrentQueue().iterator());
-            
-        } catch (Exception e) {
-            System.err.println("An error occurred: " + e.getMessage());
+                    playlist.addTrack(new Track(id, title, rating, isPremium));
+                    System.out.println("Track added successfully.");
+                }
+                case 2 -> {
+                    System.out.print("Enter Track ID to Remove: ");
+                    Long id = scanner.nextLong();
+                    playlist.removeTrack(id);
+                }
+                case 3 -> {
+                    System.out.print("Enter From Index: ");
+                    int fromIndex = scanner.nextInt();
+                    System.out.print("Enter To Index: ");
+                    int toIndex = scanner.nextInt();
+                    try {
+                        playlist.moveTrack(fromIndex, toIndex);
+                        System.out.println("Track moved successfully.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+                case 4 -> {
+                    System.out.println("Shuffled Playlist:");
+                    printTracks(playlist.shuffleIterator());
+                }
+                case 5 -> {
+                    System.out.print("Enter Track ID to Update Rating: ");
+                    Long id = scanner.nextLong();
+                    System.out.print("Enter New Rating (1-5): ");
+                    int rating = scanner.nextInt();
+                    try {
+                        playlist.updateRating(id, rating);
+                        System.out.println("Rating updated successfully.");
+                    } catch (IllegalArgumentException | NoSuchElementException e) {
+                        System.err.println(e.getMessage());
+                    }
+                }
+                case 6 -> {
+                    System.out.println("Premium Tracks:");
+                    printTracks(playlist.getPremiumTracks().iterator());
+                }
+                case 7 -> {
+                    System.out.println("All Tracks:");
+                    printTracks(playlist.getCurrentQueue().iterator());
+                }
+                case 8 -> {
+                    System.out.println("Exiting... Goodbye!");
+                    scanner.close();
+                    return;
+                }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
         }
     }
 
     private static void printTracks(Iterator<Track> iterator) {
+        if (!iterator.hasNext()) {
+            System.out.println("No tracks to display.");
+            return;
+        }
         while (iterator.hasNext()) {
             Track track = iterator.next();
             System.out.println("Track ID=" + track.getTrackId() +
@@ -210,5 +249,3 @@ public class SmartPlaylistManagementSystem {
         }
     }
 }
-
-
