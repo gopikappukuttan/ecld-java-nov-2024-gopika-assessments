@@ -6,7 +6,7 @@ class LogEntry {
     private String userId;
     private LocalDateTime timestamp;
     private String action;
-    private String status; // "SUCCESS" or "FAILURE"
+    private String status;
     private long processingTimeMs;
 
     public LogEntry(String userId, LocalDateTime timestamp, String action, String status, long processingTimeMs) {
@@ -101,7 +101,7 @@ public class LogEntryAnalysis {
                     return new AbstractMap.SimpleEntry<>(entry.getKey(), new UserActivityStats(successRate, avgProcessingTime, distinctActions));
                 })
                 .filter(entry -> entry.getValue().getSuccessRate() > 90)
-                .sorted(Comparator.comparingDouble(entry -> entry.getValue().getAvgProcessingTime())) // Sort by avg processing time
+                .sorted(Comparator.comparingDouble(entry -> entry.getValue().getAvgProcessingTime())) 
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,
                         Map.Entry::getValue
