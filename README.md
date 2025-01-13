@@ -34,4 +34,4 @@ A Training Repository that hosts exercises done and assesments conducted.
 - [Nov 21, 2024](assessments/20241121)
 - [Dec 05, 2024](assessments/20241205)
 - [Dec 19, 2024](assessments/20241219)
-- [Jan 09, 025](assessments/20250109)
+- [Jan 09, 2025](assessments/20250109)
